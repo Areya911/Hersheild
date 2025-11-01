@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import BigSOS from "./components/BigSOS";
+import SOSButton from "./components/SOSButton";
 import ActionTiles from "./components/ActionTiles";
 import Footer from "./components/Footer";
 
