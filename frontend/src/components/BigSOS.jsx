@@ -1,27 +1,24 @@
 import React from "react";
+import SOSButton from "./SOSButton";
 
-export default function BigSOS() {
+export default function BigSOS({ onClose }) {
   return (
-    <section className="mt-12 flex flex-col items-center gap-8">
-      <button
-        aria-label="SOS"
-        className="relative w-[52rem] max-w-full md:w-[60%] px-12 py-10 md:py-12 rounded-full bg-gradient-to-b from-red-600 to-rose-600 text-white font-extrabold text-2xl shadow-[0_30px_80px_rgba(220,38,38,0.25)] hover:scale-[1.01] transition-transform">
-        <div className="flex items-center justify-center gap-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 opacity-90" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" d="M12 21V3" />
-            <circle cx="12" cy="7" r="2" strokeWidth="1.6" />
-          </svg>
-          SOS
-        </div>
-      </button>
-
-      {/* small floating version for bottom-right */}
-      <button aria-label="quick-sos" className="fixed right-6 bottom-6 w-14 h-14 rounded-full bg-rose-500/90 flex items-center justify-center shadow-lg ring-2 ring-rose-400/30">
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" d="M12 2v20" />
-          <circle cx="12" cy="7" r="2" strokeWidth="1.6" />
-        </svg>
-      </button>
-    </section>
+    <div className="fixed inset-0 bg-black/90 flex flex-col items-center justify-center z-50">
+      <div className="text-center">
+        <h2 className="text-5xl font-extrabold text-rose-500 mb-6">
+          EMERGENCY MODE
+        </h2>
+        <SOSButton onClick={() => alert("Emergency Broadcast Sent! 🚨")} />
+        <p className="text-slate-400 mt-6 text-lg">
+          Your trusted contacts have been notified.
+        </p>
+        <button
+          onClick={onClose}
+          className="mt-8 px-6 py-3 rounded-md bg-slate-700 hover:bg-slate-600 text-white"
+        >
+          Exit SOS Mode
+        </button>
+      </div>
+    </div>
   );
 }

@@ -2,8 +2,10 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="max-w-6xl mx-auto px-6 py-10 text-center text-slate-500 text-sm">
-      © {new Date().getFullYear()} HerShield — community safety network
+    <footer className="border-t border-slate-800 mt-6">
+      <div className="max-w-7xl mx-auto px-6 py-4 text-sm text-slate-500">
+        © {new Date().getFullYear()} HerShield — Community Safety Prototype
+      </div>
     </footer>
   );
 }

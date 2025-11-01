@@ -1,1 +1,117 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme variables */
+:root{
+  --bg-a: #06070a;
+  --bg-b: #0b1115;
+  --card: rgba(255,255,255,0.04);
+  --muted: #94a3b8;
+  --accent: #f43f5e; /* bright rose */
+  --accent2: #38bdf8; /* sky blue */
+  --accent3: #f59e0b; /* amber */
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: radial-gradient(circle at 30% 10%, rgba(244,63,94,0.08), transparent 40%), 
+              radial-gradient(circle at 80% 80%, rgba(56,189,248,0.06), transparent 40%), 
+              linear-gradient(180deg, var(--bg-a), var(--bg-b));
+  color: #e6eef6;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Core elements */
+.container {
+  max-width: 72rem;
+  margin: auto;
+  padding: 0 1.25rem;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.25));
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.3s ease;
+}
+.card:hover {
+  border-color: var(--accent2);
+  transform: translateY(-2px);
+}
+
+/* Highlight styles */
+h1, h2, h3 {
+  background: linear-gradient(to right, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-muted { color: var(--muted); }
+
+/* SOS button */
+@keyframes pulse-sos {
+  0% { box-shadow: 0 0 0 0 rgba(244,63,94,0.28); }
+  70% { box-shadow: 0 0 0 20px rgba(244,63,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(244,63,94,0); }
+}
+.sos-pulse {
+  animation: pulse-sos 1.8s infinite;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.sos-pulse:hover {
+  transform: scale(1.05);
+}
+
+/* Header + footer */
+.header-bar {
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.footer-bar {
+  background: transparent;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: var(--muted);
+}
+
+/* Button sets */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  border: 1px solid var(--muted);
+  color: var(--muted);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  border-color: var(--accent3);
+  color: white;
+}
+
+/* Animations for hover on alert cards */
+.alert-item {
+  border-left: 3px solid transparent;
+  transition: all 0.25s ease;
+}
+.alert-item:hover {
+  border-left: 3px solid var(--accent);
+  background: rgba(244,63,94,0.1);
+}
