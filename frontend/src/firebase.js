@@ -1,10 +1,11 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, GeoPoint } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getMessaging } from "firebase/messaging";
+import { getAuth } from "firebase/auth";
 
-// read from Vite env
+// read from Vite env (your repo already uses import.meta.env)
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -20,6 +21,10 @@ const app = initializeApp(firebaseConfig);
 // exports for use in app
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+export const auth = getAuth(app);
+
+// helper to create GeoPoint easily
+export const makeGeoPoint = (lat, lng) => new GeoPoint(lat, lng);
 
 // messaging is optional — only if you want web push
 export const messaging = (() => {

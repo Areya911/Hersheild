@@ -116,3 +116,166 @@ h1, h2, h3 {
   border-left: 3px solid var(--accent);
   background: rgba(244,63,94,0.1);
 }
+
+/* --- appended UI tweaks for header & auth landing --- */
+.header-bar { padding-top: 16px; padding-bottom: 16px; }
+.header-bar .container { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.header-bar svg { display: block; }
+
+/* bigger avatar */
+button[title="Profile"] { width: 56px; height: 56px; }
+
+/* make auth landing pill buttons more prominent on small screens */
+@media (max-width: 768px) {
+  .auth-hero-buttons button { width: 80%; }
+}
+
+/* subtle body background (if not already set) */
+body { background: radial-gradient(ellipse at top left, #1b1f22, #0e1112); }
+
+/* stronger navbar glass + safe padding */
+.header-bar {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* slightly brighter nav links on hover */
+.header-bar a {
+  transition: color 0.18s ease;
+}
+.header-bar a:hover {
+  color: #ffffff;
+}
+
+/* ensure headings use Inter and look crisp */
+h1,h2,h3,h4 {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Header tweaks for dropdown + spacing */
+.header-bar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* avatar dropdown shadow + rounded corners */
+.header-bar .auth-dropdown {
+  box-shadow: 0 12px 28px rgba(2,6,23,0.6);
+}
+
+/* link hover clarity inside navbar/drawer */
+/* ensure header title does not get anchor underline from global CSS */
+.header-bar a,
+.header-bar a:visited {
+  text-decoration: none !important;
+}
+
+/* give the heading a controlled gradient appearance (use existing variables) */
+.gradient-heading {
+  /* keep existing gradient look but prevent browser underline showing through */
+  background: linear-gradient(to right, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* avoid underline from <a> by ensuring decoration removed */
+  text-decoration: none;
+  line-height: 1;
+}
+
+/* reduce global h1 size impact inside header only (prevents huge title) */
+.header-bar .gradient-heading {
+  font-size: 1.125rem; /* ~18px */
+  font-weight: 600;
+}
+
+/* slight tweak for avatar dropdown z-index and smooth entrance */
+.header-bar .rounded-xl {
+  will-change: transform;
+}
+
+/* remove any stray pseudo-content that might inject a dash (defensive) */
+/* --------- Fix stray dash & restyle avatar/menu/dropdown --------- */
+
+/* Defensive: remove pseudo-content in the header which can create stray lines */
+.header-bar *::before,
+.header-bar *::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Target avatar/hamburger specifically and remove any stray glyphs */
+.header-bar button[title="Account"],
+.header-bar button[title="Profile"],
+.header-bar button[aria-label="Open menu"] {
+  position: relative;
+  overflow: visible; /* allow shadows while preventing clipped pseudo lines */
+  outline: none;
+}
+
+/* Remove default focus outline dash and add soft ring instead */
+.header-bar button:focus {
+  outline: none !important;
+  box-shadow: 0 6px 20px rgba(2,6,23,0.6), 0 0 0 3px rgba(244,63,94,0.08);
+}
+
+/* Make sure anchor underlines don't reappear around the title */
+.header-bar a { text-decoration: none !important; }
+
+/* Tidy avatar look (soften border + spacing) */
+.header-bar button[title="Account"],
+.header-bar button[title="Profile"] {
+  margin-left: 6px;
+  background-clip: padding-box;
+  will-change: transform;
+}
+
+/* Friendly dropdown styling (uses .auth-dropdown added to Navbar.jsx) */
+.auth-dropdown {
+  min-width: 12rem;
+  padding: 6px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.6);
+  background: linear-gradient(180deg, rgba(11,17,21,0.96), rgba(11,17,21,0.92));
+  border: 1px solid rgba(255,255,255,0.04);
+  transform-origin: top right;
+  animation: dropdown-pop 140ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* dropdown links */
+.auth-dropdown a {
+  display: block;
+  padding: 10px 12px;
+  color: #cfe7ff;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 120ms ease, color 120ms ease, transform 120ms;
+}
+.auth-dropdown a:hover {
+  background: rgba(255,255,255,0.03);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* subtle separator */
+.auth-dropdown .sep {
+  height: 1px;
+  background: rgba(255,255,255,0.03);
+  margin: 6px 8px;
+  border-radius: 1px;
+}
+
+/* animation */
+@keyframes dropdown-pop {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Defensive fallback: remove any stray pseudo-line from the avatar wrapper */
+.header-bar .avatar-fallback::before,
+.header-bar .avatar-fallback::after {
+  content: none !important;
+}
